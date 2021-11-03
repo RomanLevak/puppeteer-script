@@ -22,15 +22,16 @@ export const findAtEbay = async (movieTitle: string): Promise<void> => {
 
   const searchBtn = await page.$('#gh-btn');
   await searchBtn?.click();
-
   await page.waitForNavigation();
 
-  const filmLink = await page.$('ul.srp-results .s-item__info a');
+  const filmLink = await page.$('ul.srp-results .s-item__link');
   // changing target="_blank" to target="_self" to open link in a same tab
   await page.evaluateHandle(filmLink => {
     filmLink.target = '_self';
   }, filmLink);
-  filmLink?.click();
+
+  await filmLink?.click();
+  await filmLink?.click(); // sometimes needed to click twice if 1st click didn't work because of pupop
   await page.waitForNavigation();
 
   const addToCardBtn = await page.$('#isCartBtn_btn');
