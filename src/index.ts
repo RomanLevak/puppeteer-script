@@ -2,8 +2,14 @@ import { getMovieTitle } from './getMovieTitle';
 import { findAtEbay } from './ebay';
 
 (async () => {
-  const movieTitle = await getMovieTitle();
-  console.log(`Found a movie with title: ${movieTitle}`);
+  try {
+    const movieTitle = await getMovieTitle();
+    console.log(`Found a movie with title: ${movieTitle}`);
 
-  await findAtEbay(movieTitle);
+    await findAtEbay(movieTitle);
+  } catch (error) {
+    console.log('Unexpected error happend:');
+    console.log(error);
+    process.exit(1);
+  }
 })();
