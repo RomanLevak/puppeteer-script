@@ -21,8 +21,7 @@ export const getGenre = async (): Promise<string> => {
     name: 'value',
     message: 'Select a genre',
     choices: genres.map(genre => ({ title: genre, value: genre })),
-    initial: 1,
-    onState: arg => console.log('state arg', arg)
+    initial: 0,
   });
 
   return value;

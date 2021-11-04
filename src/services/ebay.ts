@@ -43,10 +43,8 @@ export class EbayService {
       await filmLink?.click(); // sometimes needed to click twice if 1st click didn't work because of popup
     } catch (error) {}
 
-    console.log(5.2);
     // in some cases waitForNavigation stucks even if page is loaded
     await Promise.race([page.waitForNavigation(), sleep(2000)]);
-    console.log(5.3);
 
     const addToCardBtn = await page.$('#isCartBtn_btn');
 
