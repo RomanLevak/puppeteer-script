@@ -1,5 +1,5 @@
-import { sleep } from './utils';
 import puppeteer from 'puppeteer';
+import { sleep } from './utils';
 
 export const findAtEbay = async (movieTitle: string): Promise<void> => {
   const browser = await puppeteer.launch({ headless: false, slowMo: 250 });
@@ -30,7 +30,7 @@ export const findAtEbay = async (movieTitle: string): Promise<void> => {
     filmLink.target = '_self';
   }, filmLink);
 
-  await filmLink!.click();
+  filmLink!.click();
   await filmLink!.click(); // sometimes needed to click twice if 1st click didn't work because of popup
   await page.waitForNavigation();
 
