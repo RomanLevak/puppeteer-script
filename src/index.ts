@@ -1,5 +1,5 @@
-import { RottentomatoesService } from './services/rottentomatoes.service';
-import { EbayService } from './services/ebay.service';
+import { RottentomatoesService } from './services/rottentomatoes';
+import { EbayService } from './services/ebay';
 import { getGenre } from './utils/genrePrompt';
 
 (async () => {
