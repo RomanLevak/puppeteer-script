@@ -1,10 +1,11 @@
 import puppeteer from 'puppeteer';
-import { sleep } from '../utils/sleep';
 
 export class EbayService {
   static findAtEbay = async (movieTitle: string): Promise<void> => {
     const browser = await puppeteer.launch({ headless: false, slowMo: 250 });
     const page = await browser.newPage();
+    await page.setViewport({ width: 1000, height: 700 });
+
     await page.goto('https://www.ebay.com/');
     await page.$eval(
       '#gh-ac',
@@ -25,26 +26,27 @@ export class EbayService {
     await searchBtn!.click();
     await page.waitForNavigation();
 
+    // closing eBay popup, if it exists
+    await page.evaluate(() => {
+      const closeBtn = document.querySelector(
+        '.srp-save-search__tooltip button'
+      );
+      if (closeBtn) (closeBtn as HTMLButtonElement).click();
+    });
+
     const filmLink = await page.$('ul.srp-results .s-item__link');
-    // changing target="_blank" to target="_self" to open link in a same tab
     if (!filmLink) {
       console.log(`Couldn't find a movie '${movieTitle}' at ebay.com`);
       throw new Error();
     }
 
+    // changing target="_blank" to target="_self" to open link in a same tab
     await page.evaluateHandle(filmLink => {
       filmLink.target = '_self';
     }, filmLink);
 
-    filmLink!.click();
-    await sleep(1000);
-
-    try {
-      await filmLink?.click(); // sometimes needed to click twice if 1st click didn't work because of popup
-    } catch (error) {}
-
-    // in some cases waitForNavigation stucks even if page is loaded
-    await Promise.race([page.waitForNavigation(), sleep(2000)]);
+    await filmLink?.click(); // sometimes needed to click twice if 1st click didn't work because of popup
+    await page.waitForNavigation();
 
     const addToCardBtn = await page.$('#isCartBtn_btn');
 
