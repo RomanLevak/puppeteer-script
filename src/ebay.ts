@@ -21,7 +21,7 @@ export const findAtEbay = async (movieTitle: string): Promise<void> => {
   });
 
   const searchBtn = await page.$('#gh-btn');
-  await searchBtn?.click();
+  await searchBtn!.click();
   await page.waitForNavigation();
 
   const filmLink = await page.$('ul.srp-results .s-item__link');
@@ -30,20 +30,20 @@ export const findAtEbay = async (movieTitle: string): Promise<void> => {
     filmLink.target = '_self';
   }, filmLink);
 
-  await filmLink?.click();
-  await filmLink?.click(); // sometimes needed to click twice if 1st click didn't work because of pupop
+  await filmLink!.click();
+  await filmLink!.click(); // sometimes needed to click twice if 1st click didn't work because of pupop
   await page.waitForNavigation();
 
   const addToCardBtn = await page.$('#isCartBtn_btn');
-  await addToCardBtn?.click();
+  await addToCardBtn!.click();
   await page.waitForNavigation();
 
   const checkoutBtn = await page.$('[data-test-id="cta-top"]');
-  await checkoutBtn?.click();
+  await checkoutBtn!.click();
   await page.waitForNavigation();
 
   const continueGuestBtn = await page.$('#gxo-btn');
-  await continueGuestBtn?.click();
+  await continueGuestBtn!.click();
   await page.waitForNavigation();
 
   await sleep(10000);

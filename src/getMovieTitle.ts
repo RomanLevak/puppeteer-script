@@ -13,7 +13,7 @@ export const getMovieTitle = async (): Promise<string> => {
   await page.goto('https://www.rottentomatoes.com/browse/dvd-streaming-all/');
 
   const genreDropdown = await page.$('#genre-dropdown');
-  await genreDropdown?.hover();
+  await genreDropdown!.hover();
 
   // clicking on a selected genre
   await page.evaluate(genre => {
