@@ -31,7 +31,7 @@ export const findAtEbay = async (movieTitle: string): Promise<void> => {
   }, filmLink);
 
   await filmLink!.click();
-  await filmLink!.click(); // sometimes needed to click twice if 1st click didn't work because of pupop
+  await filmLink!.click(); // sometimes needed to click twice if 1st click didn't work because of popup
   await page.waitForNavigation();
 
   const addToCardBtn = await page.$('#isCartBtn_btn');

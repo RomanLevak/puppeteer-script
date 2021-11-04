@@ -8,7 +8,7 @@ import { findAtEbay } from './ebay';
 
     await findAtEbay(movieTitle);
   } catch (error) {
-    console.log('Unexpected error happend:');
+    console.log('Unexpected error happened:');
     console.log(error);
     process.exit(1);
   }
