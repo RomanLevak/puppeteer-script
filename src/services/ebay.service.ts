@@ -56,13 +56,11 @@ export class EbayService {
     await page.waitForNavigation();
 
     const continueGuestBtn = await page.$('#gxo-btn');
-    if (!addToCardBtn) {
-      console.log(`Couldn't open a checkout page`);
-      throw new Error();
+    // if there a a button to open checkout page as a guest
+    if (continueGuestBtn) {
+      await continueGuestBtn!.click();
+      await page.waitForNavigation();
     }
-
-    await continueGuestBtn!.click();
-    await page.waitForNavigation();
 
     return new Promise(resolve => browser.on('targetdestroyed', resolve));
   };
