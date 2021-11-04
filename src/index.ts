@@ -5,7 +5,6 @@ import { getGenre } from './utils/genrePrompt';
 (async () => {
   try {
     const genre = await getGenre();
-    console.log(`You selected: ${genre}`);
 
     console.log(`Finding a corresponding movie at rottentomatoes.com...`);
     const movieTitle = await RottentomatoesService.getMovieTitle(genre);
