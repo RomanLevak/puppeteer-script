@@ -14,7 +14,6 @@ import { getGenre } from './utils/genrePrompt';
     await EbayService.findAtEbay(movieTitle);
   } catch (error) {
     console.log('Unexpected error happened, closing');
-    console.log(error);
   } finally {
     process.exit(1);
   }
