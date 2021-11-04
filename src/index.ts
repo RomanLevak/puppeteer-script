@@ -10,6 +10,7 @@ import { findAtEbay } from './ebay';
   } catch (error) {
     console.log('Unexpected error happened, closing');
     console.log(error);
+  } finally {
     process.exit(1);
   }
 })();

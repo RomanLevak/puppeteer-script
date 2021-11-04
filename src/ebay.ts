@@ -63,6 +63,5 @@ export const findAtEbay = async (movieTitle: string): Promise<void> => {
   await continueGuestBtn!.click();
   await page.waitForNavigation();
 
-  await sleep(10000);
-  await browser.close();
+  return new Promise(resolve => browser.on('targetdestroyed', resolve));
 };
